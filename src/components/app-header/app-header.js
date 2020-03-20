@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const AppHeader = () => {
-    return (
-        <h1>Todo</h1>
-    )
+export default class AppHeader extends Component {
+    render() {
+        return (
+            <h1>Todo</h1>
+        )
+    }
 }
-
-export default AppHeader;
