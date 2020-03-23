@@ -2,23 +2,23 @@ import React, { Component } from 'react';
 import './filter-panel.css'
 
 export default class FilterPanel extends Component {
-    cfilter = (action) => {
-        console.log(this)
+    filter = (action) => {
+        console.log(action)
     }
     render() {
         return (
             <div className="btn-group filter-buttons">
                 <button
                     className="btn btn-secondary"
-                    onClick={ this.cfilter.bind(this, 'All') }
+                    onClick={ this.filter.bind(this, 'All') }
                 >All</button>
                 <button
                     className="btn btn-secondary"
-                    onClick={ this.cfilter.bind(this, 'Active') }
+                    onClick={ this.filter.bind(this, 'Active') }
                 >Active</button>
                 <button
                     className="btn btn-secondary"
-                    onClick={ this.cfilter.bind(this, 'Done') }
+                    onClick={ this.filter.bind(this, 'Done') }
                 >Done</button>
             </div>
         )

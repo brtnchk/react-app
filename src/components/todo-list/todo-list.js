@@ -3,12 +3,15 @@ import TodoListItem from "../todo-list-item";
 
 export default class TodoList extends Component {
     render() {
-        const { todos } = this.props
+        const { todos, onDeleted } = this.props
         const elements = todos.map((item) => {
             const { id, ...itemProp } = item;
             return (
-                <li key={ item.id } className="list-group-item">
-                    <TodoListItem { ...itemProp } />
+                <li key={ id } className="list-group-item">
+                    <TodoListItem
+                        { ...itemProp }
+                        onDeleted={ () => onDeleted(id) }
+                    />
                 </li>
             )
         });

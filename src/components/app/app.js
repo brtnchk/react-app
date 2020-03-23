@@ -8,12 +8,26 @@ import TodoList from "../todo-list";
 import './index.css';
 
 export default class App extends Component {
-    render() {
-        const todoData = [
+    state = {
+        todoData: [
             { label: 'Make awesome react app', important: true, id: 1 },
             { label: 'Drink coffee', important: false, id: 2 },
             { label: 'Have a lunch', important: false, id: 3 },
-        ];
+        ]
+    };
+    deleteItem = (id) => {
+        this.setState(({ todoData }) => {
+            const idx = todoData.findIndex((el) => el.id === id)
+            const newArray = [
+                ...todoData.slice(0, idx),
+                ...todoData.slice(idx + 1)
+            ];
+            return {
+                todoData: newArray
+            }
+        })
+    };
+    render() {
         return (
             <div className="container">
                 <AppHeader />
@@ -21,7 +35,10 @@ export default class App extends Component {
                     <FilterPanel />
                     <SearchPanel />
                 </div>
-                <TodoList todos={todoData} />
+                <TodoList
+                    todos={this.state.todoData}
+                    onDeleted={ this.deleteItem }
+                />
             </div>
         )
     }
