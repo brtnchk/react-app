@@ -1,0 +1,11 @@
+.add-item-form {
+    padding: 20px 0;
+}
+
+.add-item-button {
+    margin-left: 20px;
+}
+
+.input-group>.add-item-input:not(:last-child) {
+    border-radius: 4px;
+}
