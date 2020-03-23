@@ -4,7 +4,7 @@ import './filter-panel.css'
 export default class FilterPanel extends Component {
     filter = (action) => {
         console.log(action)
-    }
+    };
     render() {
         return (
             <div className="btn-group filter-buttons">

@@ -15,7 +15,8 @@ export default class App extends Component {
             this.createTodoItem('Make awesome react app'),
             this.createTodoItem('Drink coffee'),
             this.createTodoItem('Have a lunch')
-        ]
+        ],
+        searchString: ''
     };
     createTodoItem(label) {
         return {
@@ -62,8 +63,20 @@ export default class App extends Component {
             }
         });
     };
+    onSearch = (searchString) => {
+        this.setState({ searchString })
+    };
+    search(items, searchString) {
+        if(searchString.length === 0) {
+            return items;
+        }
+        return items.filter((item) => {
+            return item.label.toLowerCase()
+                .includes(searchString.toLowerCase())
+        })
+    };
     toggleProperty(arr, id, propName) {
-        const idx = arr.findIndex((el) => el.id === id)
+        const idx = arr.findIndex((el) => el.id === id);
         const oldItem = arr[idx];
         const newItem = {
             ...oldItem,
@@ -76,6 +89,8 @@ export default class App extends Component {
         ];
     }
     render() {
+        const { todoData, searchString } = this.state;
+        const filteredItems = this.search(todoData, searchString);
         const doneCount = this.state.todoData.filter((el) => el.done).length;
         const todoCount = this.state.todoData.length - doneCount;
         return (
@@ -86,10 +101,12 @@ export default class App extends Component {
                 />
                 <div className="input-group filter-panel">
                     <FilterPanel />
-                    <SearchPanel />
+                    <SearchPanel
+                        onSearch={ this.onSearch }
+                    />
                 </div>
                 <TodoList
-                    todos={this.state.todoData}
+                    todos={ filteredItems }
                     onDeleted={ this.deleteItem }
                     onToggleImportant={ this.onToggleImportant }
                     onToggleDone={ this.onToggleDone }
